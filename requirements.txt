@@ -1,0 +1,36 @@
+# ============================================================
+# lit-system Python dependencies
+# 
+# Python 3.11+ required (tested on Ubuntu 24.04 + Python 3.11)
+# Install:  pip install -r requirements.txt
+# ============================================================
+
+# ---------- Core: PDF parsing & document extraction ----------
+docling>=2.0.0,<3.0.0
+pypdf>=4.0.0
+
+# ---------- Vector DB & embeddings ----------
+chromadb>=0.5.0,<1.0.0
+
+# ---------- LLM client (Ollama HTTP API) ----------
+requests>=2.31.0
+
+# ---------- Tokenization (for chunk size accounting) ----------
+tiktoken>=0.6.0
+
+# ---------- Optional: PaperQA2 (Week 0 experiments only) ----------
+# paper-qa>=5.0.0
+
+# ============================================================
+# External dependencies (NOT pip-installable, see README)
+# ============================================================
+#
+# 1. Ollama runtime  -- https://ollama.com (system install)
+#    Required models:
+#      ollama pull qwen2.5:14b-instruct-q5_K_M
+#      ollama pull bge-m3
+#    Create custom 32k context model:
+#      ollama create qwen14b-32k -f Modelfile.qwen14b-32k
+#
+# 2. GPU recommended (NVIDIA 16GB+ for qwen2.5-14b-32k inference).
+#    CPU-only works but ~10x slower.

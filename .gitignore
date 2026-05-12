@@ -1,0 +1,86 @@
+# ============================================================
+# lit-system .gitignore
+# ============================================================
+
+# ---------- Python ----------
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+.python-version
+
+# ---------- PDF & raw library (版权 + 体积) ----------
+*.pdf
+library_raw/
+inbox/
+lit_library.tar.gz
+corpus/golden/*.pdf
+
+# ---------- 文献索引 / 分类(含真实文件名, 版权敏感)----------
+# 这些是个人扫描的私人结果, 含 920 篇 PDF 的真实文件名
+library_index.json
+library_classification.json
+
+# ---------- Metadata 抽取产物(含论文实际内容, 版权)----------
+# SOP_v2 抽出来的 metadata 含原文摘要/方法等版权内容
+metadata/P*.json
+# 但保留一个 example(用 arxiv preprint 跑出来的, 公开版权友好)
+!metadata/EXAMPLE_P*.json
+
+# ---------- Candidate index(含 920 真实文件名)----------
+results/candidates/*.csv
+# 但保留 example
+!results/candidates/EXAMPLE_*.csv
+
+# ---------- Docling 派生(大, 可重生成)----------
+assets/docling_test/*.json
+assets/docling_test/*.md
+assets/docling_clean/
+assets/chunks/
+assets/figures/
+assets/tables/
+assets/raw_pdf/
+assets/export/
+
+# ---------- Chroma vector DB(可重建)----------
+assets/chroma_db/
+
+# ---------- PaperQA index(可重建)----------
+index/
+
+# ---------- 日志 / 临时输出 ----------
+*.log
+results/week0_smoke*.log
+results/classify_run.log
+results/ingest_bio*.log
+results/ingest_log.jsonl
+results/bioprinting_todo*.txt
+
+# ---------- 备份 / 编辑器残留 ----------
+*.bak
+*.swp
+.*nano.swp
+*.old
+测试回复*.md
+
+# ---------- OS / IDE ----------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ---------- 不应进 git 的 docx 源文件 ----------
+corpus/outline/*.docx
+
+# ---------- Week 0-1 实验数据(含 SOP 抽取的论文内容, 版权)----------
+results/sop_*.json
+results/sop_*.txt
+results/sop_*.md
+results/evaluation.json
+# 但保留 Week 0/1 的分析笔记(无论文原文, 只是讨论)
+!results/sop_test_p5_analysis.md
+!results/week0_report.md
+!results/day*_*.md
+!results/day*_*.json
