@@ -128,3 +128,138 @@ P43 等 metadata 实际有用内容只占 70-80%.
 - Session 1-6 走一遍, 验证整个工作流
 - 记录哪里不顺, 后续修
 
+
+---
+
+## Weekend Side Task: Baseline Comparison (1.5 hr)
+
+**Decision date**: 2026-05-12 (Day 4 end)
+**When**: Saturday or Sunday evening, ~1.5 hr
+**Goal**: compare lit-system against 2 closest open-source projects
+         to validate evidence-package thesis vs chatbot thesis.
+
+### Target projects
+
+1. Navdeet/Docling-with-Ollama-for-RAG-Application
+   - Same tech stack (Docling + Ollama), different workflow (LlamaIndex + chat UI)
+2. Future-House/paper-qa (PaperQA2)
+   - Different LLM backend strategy, chat output, strong citation tracking
+   - Already tested in Week 0 v1, now testing v2
+
+### Method
+
+1. clone both to ~/baseline-comparison/
+2. Feed both the same 5 golden papers (bioprinting P1-P5)
+3. Ask same 3 questions:
+   - "What AI methods are used for in-printing monitoring?"
+   - "How do reviews report bioink printability metrics?"
+   - "What are the validation strategies for ML-driven bioprinting?"
+4. Run lit-system retrieve_test_v1.py with same 3 queries
+5. Capture screenshots / outputs
+
+### Comparison table (output to: results/baseline_comparison_2026-05-XX.md)
+
+| Dimension              | Navdeet | PaperQA2 | lit-system |
+|------------------------|---------|----------|------------|
+| Answer quality (1-5)   |         |          |            |
+| Citation precision     |         |          |            |
+| Cross-document synth   |         |          |            |
+| Metadata richness      |         |          |            |
+| Per-paper structure    |         |          |            |
+| Setup time (mins)      |         |          |            |
+| Suitable for writing?  |         |          |            |
+
+### Success criteria
+
+The comparison report should answer:
+- Is lit-system's metadata/SOP approach providing value beyond chat-RAG?
+- Should lit-system adopt any feature from these baselines (e.g. PaperQA2's
+  per-page citation, ragbase's reranking)?
+- What's the strongest differentiator to emphasize in README "Related work"?
+
+### What NOT to do
+
+- Do NOT spend > 2 hours total. If something doesn't install in 20 min, skip.
+- Do NOT change lit-system code based on this. Just observe, log, move on.
+- Do NOT compare on speed/UX. Focus on output quality for writing.
+
+### Output
+
+- results/baseline_comparison_2026-05-XX.md
+- Possibly: add "Related work" section to README citing these projects
+
+---
+
+## Backlog: Open-source baseline exploration (defer to Week 3 weekend or later)
+
+**Decision date**: 2026-05-12 Day 4 evening
+**Time budget**: 2 hours max, spread over 2 sessions
+**Why deferred**: Today's workload already exceeded budget. Tomorrow's
+priority is Week 3 Day 1 (SOP_v3 prompt + benchmark). Baseline comparison
+is "nice-to-have", not blocking.
+
+### Setup once (15 min)
+
+  mkdir -p ~/github-playground/lit-rag-tools
+  mkdir -p ~/github-playground/test_papers
+  cp ~/lit-system/corpus/golden/*.pdf ~/github-playground/test_papers/
+
+### Order of exploration
+
+Phase 1 (fully local, no API needed): pick 1 of 3 each session
+  1. ollama_pdf_rag      (Streamlit mode only, skip Next.js to avoid Node setup)
+                          tonykipkemboi/ollama_pdf_rag
+  2. ragbase             (needs Qdrant container, check if docker.io installed)
+                          curiousily/ragbase
+  3. docling-graph       (PRIORITY - schema-first design is most relevant to
+                          lit-system SOP_v3 + Pydantic validator work)
+                          docling-project/docling-graph
+
+Phase 2 (API optional): only after Phase 1 done
+  4. paper-qa            Future-House/paper-qa
+                          - LiteLLM + Ollama backend possible but fiddly
+                          - Already tested v1 in Week 0
+                          - Re-test only if v2 has new citation/synthesis features
+
+Phase 3 (read source only, do NOT install):
+  - MOLE                  benchmark methodology
+  - MeXtract              fine-tuning approach
+  - LLM-SLR               screening workflow
+  - parsemypdf            PDF parser landscape
+
+### Existing assets already prepared (2026-05-12 evening)
+
+- ~/baseline-comparison/navdeet/   (Docling-with-Ollama-RAG, Streamlit + LlamaIndex)
+  - venv installed (380 packages)
+  - app.py read (138 lines) - uses MarkdownNodeParser, single-PDF only
+  - 5 golden PDFs copied to test_pdfs/
+  - llama3.2 model pulled to Ollama (overnight)
+  - bge-large-en-v1.5 cached from HuggingFace
+- ~/baseline-comparison/paperqa-venv/  (incomplete - pip install killed)
+
+### Comparison method
+
+Pick 1 golden paper (e.g. P1 AI for bioprinting.pdf).
+Ask the same 3 questions in each system:
+  Q1: "What AI methods are used for in-printing monitoring?"
+  Q2: "How do reviews report bioink printability metrics?"
+  Q3: "What are validation strategies for ML-driven bioprinting?"
+
+Same paper, same questions, observe:
+  - lit-system: returns chunks + metadata
+  - others: return chat answer with varying citation quality
+
+### Output
+
+results/baseline_comparison_<date>.md
+  - Brief observation per tool
+  - Screenshot if Streamlit UI
+  - Key learning for lit-system
+
+### DO NOT
+
+- Spend > 2 hours total across all tools
+- Change lit-system code based on findings (just log, defer to Week 3 Day 2+)
+- Compare on UI/speed/setup (focus on retrieval + writing usefulness)
+- Run on the full 124-paper library (use 5 golden only)
+- Block Week 3 Day 1 (SOP_v3 + benchmark) waiting on this
