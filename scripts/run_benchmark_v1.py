@@ -308,7 +308,9 @@ def main():
         "results": results,
         "summary": summary,
     }
-    out_path = RESULTS_DIR / "benchmark_sop_v2_baseline.json"
+    import sys
+    out_name = sys.argv[1] if len(sys.argv) > 1 else "benchmark_sop_v2_baseline.json"
+    out_path = RESULTS_DIR / out_name
     out_path.write_text(json.dumps(output, indent=2, ensure_ascii=False))
     print()
     print(f"Saved: {out_path}")

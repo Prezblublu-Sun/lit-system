@@ -1,0 +1,150 @@
+# RSC Book Chapter: AI and Robotic-Assisted Approaches in 3D Bioprinting
+# Outline extracted from draft_4 (2026-04-28)
+# Used by scripts/chapter_evidence.py to generate section-by-section material packages
+
+chapter:
+  title: "Artificial Intelligence and Robotic-Assisted Approaches in 3D Bioprinting"
+  authors: "Weikang Sun et al."
+  target_total_words: 4200
+
+sections:
+  - id: X.1
+    title: "Introduction"
+    target_words: 400
+    query: "AI bioprinting workflow pre-printing in-printing post-printing intelligent biofabrication"
+    cited_dois: []
+    description: "Workflow-spanning AI in bioprinting; pre/in/post-printing intelligence; need for system-level coordination."
+
+  - id: X.2
+    title: "3D Bioprinting and robotic-assisted in-situ bioprinting"
+    target_words: 500
+    query: "3D bioprinting modalities extrusion inkjet light-assisted in-situ robotic"
+    cited_dois:
+      - "10.1002/adma.202408032"
+      - "10.1016/j.bprint.2024.e00331"
+
+  - id: X.2.1
+    title: "Extrusion-based bioprinting (EBB)"
+    target_words: 200
+    query: "extrusion-based bioprinting rheology shape fidelity cell viability"
+    cited_dois: []
+
+  - id: X.2.2
+    title: "Inkjet bioprinting (IJB)"
+    target_words: 200
+    query: "inkjet bioprinting droplet viscosity nozzle clogging cell encapsulation"
+    cited_dois: []
+
+  - id: X.2.3
+    title: "Light-assisted bioprinting (LAB)"
+    target_words: 200
+    query: "light-assisted bioprinting photopolymerization curing depth photoinitiator cytocompatibility"
+    cited_dois: []
+
+  - id: X.3.1
+    title: "AI as a tool"
+    target_words: 300
+    query: "AI machine learning deep learning foundation models evolution overview applications"
+    cited_dois:
+      - "10.1088/1758-5090/ad8966"
+      - "10.1002/adfm.202509530"
+      - "10.1088/1758-5090/ad2189"
+
+  - id: X.3.2.1
+    title: "Blueprint generation and manufacturable design"
+    target_words: 250
+    query: "AI blueprint generation manufacturable design anatomy bioprinting CAD feature extraction"
+    cited_dois:
+      - "10.3389/fbioe.2019.00443"
+      - "10.1038/s41598-020-78799-w"
+
+  - id: X.3.2.2
+    title: "Nozzle and bioink design"
+    target_words: 300
+    query: "nozzle bioink design rheology extrusion printability ML prediction formulation"
+    cited_dois:
+      - "10.1088/1758-5090/ab8707"
+      - "10.3390/gels11010045"
+      - "10.36922/ijb.1280"
+      - "10.1002/adhm.202402727"
+      - "10.1007/s00397-025-01504-z"
+
+  - id: X.3.2.3
+    title: "Process window and parameters optimization"
+    target_words: 250
+    query: "bioprinting process window parameter optimization Bayesian Gaussian Process design of experiments"
+    cited_dois:
+      - "10.1016/j.apmt.2020.100914"
+      - "10.1088/1758-5090/ad17cf"
+      - "10.1007/s10845-020-01708-5"
+      - "10.1002/advs.202412831"
+      - "10.1088/1758-5090/ab8707"
+      - "10.1080/17452759.2024.2400330"
+
+  - id: X.3.3.1
+    title: "Print pattern anomaly detection"
+    target_words: 200
+    query: "bioprinting anomaly detection over-extrusion under-extrusion filament defect computer vision"
+    cited_dois:
+      - "10.1016/j.procir.2022.06.040"
+      - "10.1021/acsbiomaterials.0c01761"
+      - "10.18063/ijb.v9i1.624"
+
+  - id: X.3.3.2
+    title: "Process-state classification / online process visibility"
+    target_words: 200
+    query: "bioprinting process state classification segmentation real-time imaging CNN U-Net"
+    cited_dois:
+      - "10.1016/j.addma.2021.102251"
+      - "10.18063/ijb.v8i4.620"
+      - "10.48550/arXiv.2509.06690"
+      - "10.1007/s10845-023-02167-4"
+
+  - id: X.3.3.3
+    title: "Local corrective action (closed-loop)"
+    target_words: 200
+    query: "closed-loop bioprinting feedback control corrective action G-code adaptive printing"
+    cited_dois:
+      - "10.1002/adfm.202424553"
+      - "10.18063/ijb.v9i1.624"
+      - "10.18063/ijb.v8i4.620"
+      - "10.1007/s10845-023-02167-4"
+
+  - id: X.3.4.1
+    title: "Biological consequence and functional interpretation"
+    target_words: 200
+    query: "bioprinting cell viability stress proliferation phenotype post-printing biological outcome"
+    cited_dois:
+      - "10.1038/s41598-023-28286-9"
+      - "10.1088/1758-5090/ad17cf"
+      - "10.1007/s10845-020-01708-5"
+
+  - id: X.3.4.2
+    title: "Post-printing cell behavior and scaffold-cell interaction modeling"
+    target_words: 200
+    query: "scaffold cell interaction modeling pore architecture migration aggregation tissue organization"
+    cited_dois:
+      - "10.1038/s41598-023-28286-9"
+      - "10.1080/17452759.2024.2400330"
+
+  - id: X.3.4.3
+    title: "Toward predictive maturation, differentiation, and functional outcomes"
+    target_words: 200
+    query: "bioprinting predictive maturation differentiation Vision Transformer EfficientNet imaging prediction"
+    cited_dois:
+      - "10.1038/s42003-024-07109-1"
+      - "10.3390/bioengineering12010028"
+
+  - id: X.4
+    title: "Cross-cutting infrastructure for intelligent bioprinting"
+    target_words: 800
+    query: "bioprinting standardization reproducibility data infrastructure digital twin quality descriptors"
+    cited_dois: []
+
+  - id: X.5
+    title: "System-level automation, robotic integration, and in-situ intelligent bioprinting"
+    target_words: 800
+    query: "robotic bioprinting in-situ automation path planning context-aware self-driving laboratory"
+    cited_dois:
+      - "10.18063/ijb.v9i1.629"
+      - "10.1002/adfm.202509530"

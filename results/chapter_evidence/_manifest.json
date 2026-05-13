@@ -1,0 +1,198 @@
+{
+  "chapter": {
+    "title": "Artificial Intelligence and Robotic-Assisted Approaches in 3D Bioprinting",
+    "authors": "Weikang Sun et al.",
+    "target_total_words": 4200
+  },
+  "generated": "2026-05-13T14:51:31.868846",
+  "top_n_per_section": 12,
+  "sections": [
+    {
+      "section_id": "X.1",
+      "title": "Introduction",
+      "target_words": 400,
+      "file": "section_X_1.md",
+      "chars": 27032,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 8,
+      "n_cited_total": 0,
+      "n_cited_in_library": 0
+    },
+    {
+      "section_id": "X.2",
+      "title": "3D Bioprinting and robotic-assisted in-situ bioprinting",
+      "target_words": 500,
+      "file": "section_X_2.md",
+      "chars": 39365,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 6,
+      "n_cited_total": 2,
+      "n_cited_in_library": 2
+    },
+    {
+      "section_id": "X.2.1",
+      "title": "Extrusion-based bioprinting (EBB)",
+      "target_words": 200,
+      "file": "section_X_2_1.md",
+      "chars": 21932,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 5,
+      "n_cited_total": 0,
+      "n_cited_in_library": 0
+    },
+    {
+      "section_id": "X.2.2",
+      "title": "Inkjet bioprinting (IJB)",
+      "target_words": 200,
+      "file": "section_X_2_2.md",
+      "chars": 23992,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 6,
+      "n_cited_total": 0,
+      "n_cited_in_library": 0
+    },
+    {
+      "section_id": "X.2.3",
+      "title": "Light-assisted bioprinting (LAB)",
+      "target_words": 200,
+      "file": "section_X_2_3.md",
+      "chars": 25523,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 7,
+      "n_cited_total": 0,
+      "n_cited_in_library": 0
+    },
+    {
+      "section_id": "X.3.1",
+      "title": "AI as a tool",
+      "target_words": 300,
+      "file": "section_X_3_1.md",
+      "chars": 42327,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 8,
+      "n_cited_total": 3,
+      "n_cited_in_library": 2
+    },
+    {
+      "section_id": "X.3.2.1",
+      "title": "Blueprint generation and manufacturable design",
+      "target_words": 250,
+      "file": "section_X_3_2_1.md",
+      "chars": 34746,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 8,
+      "n_cited_total": 2,
+      "n_cited_in_library": 1
+    },
+    {
+      "section_id": "X.3.2.2",
+      "title": "Nozzle and bioink design",
+      "target_words": 300,
+      "file": "section_X_3_2_2.md",
+      "chars": 59637,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 5,
+      "n_cited_total": 5,
+      "n_cited_in_library": 5
+    },
+    {
+      "section_id": "X.3.2.3",
+      "title": "Process window and parameters optimization",
+      "target_words": 250,
+      "file": "section_X_3_2_3.md",
+      "chars": 73062,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 8,
+      "n_cited_total": 6,
+      "n_cited_in_library": 6
+    },
+    {
+      "section_id": "X.3.3.1",
+      "title": "Print pattern anomaly detection",
+      "target_words": 200,
+      "file": "section_X_3_3_1.md",
+      "chars": 50014,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 8,
+      "n_cited_total": 3,
+      "n_cited_in_library": 3
+    },
+    {
+      "section_id": "X.3.3.2",
+      "title": "Process-state classification / online process visibility",
+      "target_words": 200,
+      "file": "section_X_3_3_2.md",
+      "chars": 47085,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 6,
+      "n_cited_total": 4,
+      "n_cited_in_library": 3
+    },
+    {
+      "section_id": "X.3.3.3",
+      "title": "Local corrective action (closed-loop)",
+      "target_words": 200,
+      "file": "section_X_3_3_3.md",
+      "chars": 56133,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 7,
+      "n_cited_total": 4,
+      "n_cited_in_library": 4
+    },
+    {
+      "section_id": "X.3.4.1",
+      "title": "Biological consequence and functional interpretation",
+      "target_words": 200,
+      "file": "section_X_3_4_1.md",
+      "chars": 48604,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 7,
+      "n_cited_total": 3,
+      "n_cited_in_library": 3
+    },
+    {
+      "section_id": "X.3.4.2",
+      "title": "Post-printing cell behavior and scaffold-cell interaction modeling",
+      "target_words": 200,
+      "file": "section_X_3_4_2.md",
+      "chars": 43756,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 9,
+      "n_cited_total": 2,
+      "n_cited_in_library": 2
+    },
+    {
+      "section_id": "X.3.4.3",
+      "title": "Toward predictive maturation, differentiation, and functional outcomes",
+      "target_words": 200,
+      "file": "section_X_3_4_3.md",
+      "chars": 46778,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 11,
+      "n_cited_total": 2,
+      "n_cited_in_library": 2
+    },
+    {
+      "section_id": "X.4",
+      "title": "Cross-cutting infrastructure for intelligent bioprinting",
+      "target_words": 800,
+      "file": "section_X_4.md",
+      "chars": 28371,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 9,
+      "n_cited_total": 0,
+      "n_cited_in_library": 0
+    },
+    {
+      "section_id": "X.5",
+      "title": "System-level automation, robotic integration, and in-situ intelligent bioprinting",
+      "target_words": 800,
+      "file": "section_X_5.md",
+      "chars": 39013,
+      "n_chunks_retrieved": 12,
+      "n_unique_papers_retrieved": 11,
+      "n_cited_total": 2,
+      "n_cited_in_library": 1
+    }
+  ]
+}

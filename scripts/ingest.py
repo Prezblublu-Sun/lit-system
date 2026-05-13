@@ -108,6 +108,38 @@ def ingest_one(pdf_path: Path, paper_id: str, doc_id: str, content_hash: str,
     doi_info["title_method"] = "llm" if title_extracted else "filename_stem"
     summary["stages"]["doi"] = doi_info
     print(f"    DOI {doi_info['method']}: {doi_info['doi'] or '(none)'} -- {doi_info['details']}")
+    
+    # === DOI dedup WARN-only check ===
+    # Scan existing metadata for duplicate DOI; log a warning but do NOT skip.
+    # This produces an audit trail of DOI collisions during overnight --force re-ingest.
+    if doi_info.get("doi"):
+        _doi_to_check = doi_info["doi"].lower().strip()
+        _other_pids_with_same_doi = []
+        try:
+            for _f in sorted(METADATA_DIR.glob("P*.json")):
+                if _f.stem == paper_id:
+                    continue  # don't compare to self
+                try:
+                    _other = json.loads(_f.read_text())
+                    _od = _other.get("source_block", {}).get("doi")
+                    if isinstance(_od, dict):
+                        _od = _od.get("value")
+                    if _od and _od.lower().strip() == _doi_to_check:
+                        _other_pids_with_same_doi.append(_f.stem)
+                except Exception:
+                    pass
+        except Exception:
+            pass
+        if _other_pids_with_same_doi:
+            print(f"    [doi-dedup-warn] DOI {_doi_to_check} also present in: {_other_pids_with_same_doi}")
+            doi_info["dedup_collisions"] = _other_pids_with_same_doi
+            log_event({
+                "action": "doi_collision",
+                "paper_id": paper_id,
+                "doi": _doi_to_check,
+                "other_paper_ids": _other_pids_with_same_doi,
+                "pdf": pdf_path.name,
+            })
 
     # Stage: SOP v2 (skippable)
     if dry_run or skip_sop:
@@ -197,6 +229,26 @@ def main():
     args = ap.parse_args()
 
     pdfs = [Path(p).resolve() for p in args.pdfs]
+    
+    # === Ollama restart hook: every N papers, restart to avoid KV cache bloat ===
+    OLLAMA_RESTART_EVERY = 10
+    import subprocess
+    import time as _time_for_restart
+    _papers_processed = 0
+    
+    def _restart_ollama_if_needed():
+        nonlocal _papers_processed
+        _papers_processed += 1
+        if _papers_processed > 0 and _papers_processed % OLLAMA_RESTART_EVERY == 0:
+            print(f"  [ollama-hook] restarting ollama after {_papers_processed} papers...")
+            try:
+                subprocess.run(['sudo', '-n', 'systemctl', 'restart', 'ollama'],
+                               check=True, timeout=30)
+                _time_for_restart.sleep(15)
+                print(f"  [ollama-hook] restarted, slept 15s, continuing")
+            except Exception as e:
+                print(f"  [ollama-hook] WARNING: restart failed: {e}")
+    
     for p in pdfs:
         if not p.exists():
             print(f"[error] not found: {p}")
@@ -253,6 +305,7 @@ def main():
             failed += 1
             continue
         all_summaries.append(summary)
+        _restart_ollama_if_needed()
 
     # Final report
     print(f"\n{'='*60}\nINGEST REPORT")

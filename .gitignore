@@ -93,3 +93,12 @@ scripts/ingest/pipeline.py.backup_*
 
 # pipeline.py backups from manual edits
 scripts/ingest/pipeline.py.backup_*
+
+# Old empty chroma path (real chroma is assets/chroma_db/)
+chroma/
+
+# ingest.py backups
+scripts/ingest.py.backup_*
+
+# Chapter master document (regenerable from section files)
+results/chapter_evidence/_chapter_master.md
