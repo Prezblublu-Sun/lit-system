@@ -14,7 +14,36 @@ from .doi_extract import get_doi
 
 # ============ Constants (mirror existing scripts) ============
 
-CLEANING_VERSION  = "v1_content_layer_body"
+CLEANING_VERSION  = "v2_section_boundary_body"
+
+# === cleaning_v2 helpers ===
+import re as _re_clean_v2
+_BODY_START_PATTERN = _re_clean_v2.compile(
+    r"^(abstract|introduction|1\.\s)", _re_clean_v2.IGNORECASE)
+_BODY_END_PATTERN = _re_clean_v2.compile(
+    r"^(references|bibliography|acknowledg(e?)ments?|funding|"
+    r"conflict|data availability|author contributions|orcid)",
+    _re_clean_v2.IGNORECASE)
+
+def _find_body_range(texts):
+    """v2: detect [start, end) of true body content via section_header markers."""
+    start_idx = 0
+    end_idx = len(texts)
+    for i, t in enumerate(texts):
+        if t.get("label") == "section_header":
+            txt = (t.get("text", "") or "").strip()
+            if _BODY_START_PATTERN.match(txt):
+                start_idx = i
+                break
+    for i in range(start_idx + 1, len(texts)):
+        t = texts[i]
+        if t.get("label") == "section_header":
+            txt = (t.get("text", "") or "").strip()
+            if _BODY_END_PATTERN.match(txt):
+                end_idx = i
+                break
+    return start_idx, end_idx
+
 CHUNKER_VERSION   = "token_window_chunker_v3"
 PROMPT_VERSION    = "sop_v2_qwen14b_32k"
 
@@ -93,8 +122,13 @@ def run_cleaning(docling_json_path: Path, out_dir: Path, paper_id: str):
     d = json.loads(docling_json_path.read_text())
     texts = d.get("texts", [])
     before = len(texts)
-    kept    = [t for t in texts if t.get("content_layer") == "body"]
-    dropped = [t for t in texts if t.get("content_layer") != "body"]
+    # v2: detect body range first (skip pre-body TOC/affiliations, post-body refs/acks)
+    _body_start, _body_end = _find_body_range(texts)
+    _body_range = texts[_body_start:_body_end]
+    
+    kept    = [t for t in _body_range if t.get("content_layer") == "body"]
+    _furniture = [t for t in _body_range if t.get("content_layer") != "body"]
+    dropped = texts[:_body_start] + texts[_body_end:] + _furniture
 
     cleaned = dict(d)
     cleaned["texts"] = kept
@@ -142,41 +176,76 @@ def run_cleaning(docling_json_path: Path, out_dir: Path, paper_id: str):
 # Each tuple: (sop_key, prompt_template_fn) -- prompts mirror sop_v2_direct.py
 # We keep the prompts inline here to make the pipeline self-contained.
 
+# SOP_v3 prompts: per ADR-0007 (clean output). v3 design philosophy:
+# - No "page numbers" requested (LLM has no page info, would hallucinate)
+# - No "1) 2) 3)" enumerate (triggers markdown)
+# - No "A) B) C)" sub-heading (triggers bold)
+# - CRITICAL OUTPUT RULES block prohibits markdown / fake pages / filler
+# - L2_scoring has explicit one-line-per-dimension exception
+
+_SOP_V3_RULES = """
+CRITICAL OUTPUT RULES (must obey):
+1. Plain prose paragraphs only. NO markdown.
+2. NO bold (**text**), NO headers (### / ##), NO bullets (* / -), NO numbered lists (1. / 1) / A) ).
+3. NO page references. You do not have page information. Do not write "page 5", "(p.2)", "pages 4-5", etc.
+4. NO preamble like "Based on the provided text" or "Here are the methods". Start directly with substantive content.
+5. NO repeating the question phrasing. Start with information, not "This paper addresses...".
+6. Separate paragraphs with single newline. No section labels.
+"""
+
 SOP_PROMPTS = {
     "L1_factual_background": (
-        "You are extracting factual content from a research paper.\n\n"
-        "Paper text:\n{text}\n\n"
-        "Extract the following with exact quotes and page numbers where possible:\n"
-        "1) Research Background\n2) Core Concepts\n3) Common Pitfalls or Failure Modes\n"
-        "4) Design Objectives\n5) Evaluation Metrics"
+        "Extract the factual background of this research paper.\n\n"
+        + _SOP_V3_RULES + "\n"
+        + "Cover in one continuous narrative: what problem the paper studies, what concepts are relevant, "
+        + "what failure modes prior work has, what the paper aims to achieve, and how it measures success.\n\n"
+        + "Paper text:\n{text}\n\n"
+        + "Output:"
     ),
     "L1_factual_methods": (
-        "You are extracting methods from a research paper.\n\n"
-        "Paper text:\n{text}\n\n"
-        "List all methods organized as:\nA) Experimental Methods\n"
-        "B) Analytical/Modeling Methods\nC) Validation Methods\n"
-        "Include page numbers."
+        "Extract the methods used in this research paper.\n\n"
+        + _SOP_V3_RULES + "\n"
+        + "Describe in continuous prose all experimental procedures, analytical or modeling techniques, "
+        + "and validation approaches. Do not group them with labels. Just describe each method as a "
+        + "self-contained sentence or two of prose.\n\n"
+        + "Paper text:\n{text}\n\n"
+        + "Output:"
     ),
     "L2_interpretive_problem": (
-        "You are critically analyzing a research paper.\n\n"
-        "Paper text:\n{text}\n\n"
-        "Answer with page references:\n"
-        "1) Most central problem and why it matters\n"
-        "2) Hardest technical difficulties\n"
-        "3) What did the authors CLAIM vs what evidence ACTUALLY supports? Gaps\n"
-        "4) One-sentence judgment of intellectual contribution"
+        "Critically analyze this research paper.\n\n"
+        + _SOP_V3_RULES + "\n"
+        + "Write a continuous prose analysis covering: the central problem and its significance, "
+        + "the hardest technical difficulties, the gap between authors' claims and supporting evidence, "
+        + "and a one-sentence overall judgment of intellectual contribution. "
+        + "Do not label these as separate questions; weave into flowing analysis.\n\n"
+        + "Paper text:\n{text}\n\n"
+        + "Output:"
     ),
     "L2_interpretive_scoring": (
-        "Score the paper 1-10 on each of these 10 dimensions, with one-sentence justification each:\n"
-        "Novelty, Clarity, Methodological rigor, Empirical strength, Reproducibility,\n"
-        "Theoretical contribution, Practical impact, Scope appropriateness, "
-        "Writing quality, Citation/literature use.\n\n"
-        "Paper text:\n{text}"
+        "Score this paper on 10 dimensions. For EACH dimension, write exactly one line:\n"
+        "    dimension_name: SCORE/10. One-sentence justification.\n\n"
+        "Example:\n"
+        "    novelty: 7/10. Combines existing ML methods in a new application domain but no new algorithm.\n"
+        "    clarity: 8/10. Figures are clean and the math is well-explained.\n\n"
+        "This one-line-per-dimension format is the ONLY structured list allowed; "
+        "everywhere else in your output, use plain prose.\n\n"
+        + _SOP_V3_RULES + "\n"
+        + "Use lowercase dimension names. No bold. No quotes around dimension names.\n\n"
+        + "Dimensions: novelty, clarity, methodological rigor, empirical strength, reproducibility, "
+        + "theoretical contribution, practical impact, scope appropriateness, writing quality, citation use.\n\n"
+        + "Paper text:\n{text}\n\n"
+        + "Output:"
     ),
     "L3_personal_relevance": (
-        "Given this paper and the review outline below, identify the top 3 sections of the "
-        "review outline this paper most belongs to, with reasoning.\n\n"
-        "Review outline:\n{outline}\n\nPaper text:\n{text}"
+        "Identify the top 3 sections of the review outline this paper best supports.\n\n"
+        + _SOP_V3_RULES + "\n"
+        + "For each section, write a single prose paragraph (3-5 sentences) explaining: "
+        + "which section, what specific arguments the paper supports, and what evidence type "
+        + "(empirical / theoretical / review / methodology). Do not number the sections in output; "
+        + "separate them with blank lines.\n\n"
+        + "Review outline:\n{outline}\n\n"
+        + "Paper text:\n{text}\n\n"
+        + "Output:"
     ),
 }
 

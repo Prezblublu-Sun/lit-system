@@ -87,3 +87,9 @@ results/evaluation.json
 
 # Golden set: PDF symlinks (point to ignored inbox/)
 golden_set/*/P*.pdf
+
+# pipeline.py backups from manual edits
+scripts/ingest/pipeline.py.backup_*
+
+# pipeline.py backups from manual edits
+scripts/ingest/pipeline.py.backup_*
