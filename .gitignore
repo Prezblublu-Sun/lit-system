@@ -84,3 +84,6 @@ results/evaluation.json
 !results/week0_report.md
 !results/day*_*.md
 !results/day*_*.json
+
+# Golden set: PDF symlinks (point to ignored inbox/)
+golden_set/*/P*.pdf

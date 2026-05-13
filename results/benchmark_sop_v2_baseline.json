@@ -1,0 +1,1047 @@
+{
+  "benchmark_version": "v1",
+  "sop_version": "v2",
+  "schema_version": "v1",
+  "ran_at": "2026-05-13T10:24:18.041815",
+  "papers": [
+    "P1",
+    "P5",
+    "P44",
+    "P77",
+    "P117"
+  ],
+  "results": [
+    {
+      "paper_id": "P1",
+      "doc_id": "5f23b7834bcd9638",
+      "title_extracted": "AI for biofabrication",
+      "doi_extracted": null,
+      "field_completeness": {
+        "L1_background": {
+          "present": true,
+          "length": 2352,
+          "value_preview": "1) **Research Background**:\n\"Biofabrication is an advanced technology that holds..."
+        },
+        "L1_methods": {
+          "present": true,
+          "length": 1275,
+          "value_preview": "**A) Experimental Methods**\n\n1. **Medical Imaging Techniques**: Used to capture ..."
+        },
+        "L2_problem": {
+          "present": true,
+          "length": 3125,
+          "value_preview": "1) **Most central problem and why it matters**: The most central problem address..."
+        },
+        "L2_scoring": {
+          "present": true,
+          "length": 2033,
+          "value_preview": "(1) Problem Importance: 4 - The paper addresses the significant challenge of int..."
+        },
+        "L3_personal": {
+          "present": true,
+          "length": 1163,
+          "value_preview": "1) This paper best supports the section \"X.1 Introduction\" of your book chapter ..."
+        }
+      },
+      "filler": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      },
+      "fake_page": {
+        "L1_background": {
+          "present": true,
+          "count": 9,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              5
+            ],
+            [
+              "\\(pages \\d+",
+              2
+            ],
+            [
+              "pages? \\d+[-\\u2013]\\d+",
+              2
+            ]
+          ]
+        },
+        "L1_methods": {
+          "present": true,
+          "count": 10,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              6
+            ],
+            [
+              "\\(pages \\d+",
+              2
+            ],
+            [
+              "pages? \\d+[-\\u2013]\\d+",
+              2
+            ]
+          ]
+        },
+        "L2_problem": {
+          "present": true,
+          "count": 11,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              1
+            ],
+            [
+              "\\(pages \\d+",
+              5
+            ],
+            [
+              "pages? \\d+[-\\u2013]\\d+",
+              5
+            ]
+          ]
+        },
+        "L2_scoring": {
+          "present": true,
+          "count": 16,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              4
+            ],
+            [
+              "\\(pages \\d+",
+              6
+            ],
+            [
+              "pages? \\d+[-\\u2013]\\d+",
+              6
+            ]
+          ]
+        },
+        "L3_personal": {
+          "present": true,
+          "count": 3,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              2
+            ],
+            [
+              "on page \\d+",
+              1
+            ]
+          ]
+        }
+      },
+      "markdown": {
+        "L1_background": {
+          "present": true,
+          "count": 5,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              5
+            ]
+          ]
+        },
+        "L1_methods": {
+          "present": true,
+          "count": 19,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              11
+            ],
+            [
+              "^\\d+\\.\\s\\*\\*",
+              8
+            ]
+          ]
+        },
+        "L2_problem": {
+          "present": true,
+          "count": 7,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              7
+            ]
+          ]
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "prompt_echo": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": true,
+          "matched_patterns": [
+            "The most central problem (addressed|identified) by this paper"
+          ]
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": true,
+          "matched_patterns": [
+            "This paper best supports"
+          ]
+        }
+      }
+    },
+    {
+      "paper_id": "P5",
+      "doc_id": "63a0f39f8e576219",
+      "title_extracted": "The Synergy of Artificial Intelligence and 3D Bioprinting",
+      "doi_extracted": null,
+      "field_completeness": {
+        "L1_background": {
+          "present": true,
+          "length": 2226,
+          "value_preview": "1) **Research Background**:\n\"The integration of AI enables automated quality con..."
+        },
+        "L1_methods": {
+          "present": true,
+          "length": 1613,
+          "value_preview": "**A) Experimental Methods**\n\n1. **Bioprinting**: To fabricate tissue constructs ..."
+        },
+        "L2_problem": {
+          "present": true,
+          "length": 2713,
+          "value_preview": "1) **Most central problem and why it matters**: The most central problem address..."
+        },
+        "L2_scoring": {
+          "present": true,
+          "length": 2175,
+          "value_preview": "(1) Problem Importance: 4 - The paper addresses significant challenges in biopri..."
+        },
+        "L3_personal": {
+          "present": true,
+          "length": 1379,
+          "value_preview": "1) This paper best supports the section \"X.1 Introduction\" of your book chapter ..."
+        }
+      },
+      "filler": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      },
+      "fake_page": {
+        "L1_background": {
+          "present": true,
+          "count": 13,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              7
+            ],
+            [
+              "\\(pages \\d+",
+              3
+            ],
+            [
+              "pages? \\d+[-\\u2013]\\d+",
+              3
+            ]
+          ]
+        },
+        "L1_methods": {
+          "present": true,
+          "count": 10,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              5
+            ],
+            [
+              "\\(pages \\d+",
+              5
+            ]
+          ]
+        },
+        "L2_problem": {
+          "present": true,
+          "count": 7,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              7
+            ]
+          ]
+        },
+        "L2_scoring": {
+          "present": true,
+          "count": 9,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              3
+            ],
+            [
+              "\\(pages \\d+",
+              3
+            ],
+            [
+              "pages? \\d+[-\\u2013]\\d+",
+              3
+            ]
+          ]
+        },
+        "L3_personal": {
+          "present": true,
+          "count": 2,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              2
+            ]
+          ]
+        }
+      },
+      "markdown": {
+        "L1_background": {
+          "present": true,
+          "count": 5,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              5
+            ]
+          ]
+        },
+        "L1_methods": {
+          "present": true,
+          "count": 23,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              13
+            ],
+            [
+              "^\\d+\\.\\s\\*\\*",
+              10
+            ]
+          ]
+        },
+        "L2_problem": {
+          "present": true,
+          "count": 6,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              6
+            ]
+          ]
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "prompt_echo": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": true,
+          "matched_patterns": [
+            "This paper best supports"
+          ]
+        }
+      }
+    },
+    {
+      "paper_id": "P44",
+      "doc_id": "59efff5fa9ec3a3d",
+      "title_extracted": "Computer vision-aided bioprinting for bone research",
+      "doi_extracted": "10.1038/s41413-022-00192-2",
+      "field_completeness": {
+        "L1_background": {
+          "present": true,
+          "length": 2224,
+          "value_preview": "Based on the provided text, here are the extracted sections:\n\n**Research Backgro..."
+        },
+        "L1_methods": {
+          "present": true,
+          "length": 2847,
+          "value_preview": "### A) Experimental Methods\n\n1. **Bone Scaffold Trajectory Correction**\n   - Dat..."
+        },
+        "L2_problem": {
+          "present": true,
+          "length": 1863,
+          "value_preview": "1) **Most Central Problem and Why It Matters:**\nThe most central problem address..."
+        },
+        "L2_scoring": {
+          "present": true,
+          "length": 1935,
+          "value_preview": "Here is the scoring for each dimension along with one-sentence justifications:\n\n..."
+        },
+        "L3_personal": {
+          "present": true,
+          "length": 1597,
+          "value_preview": "Based on the content of the paper \"Computer vision-aided bioprinting for bone re..."
+        }
+      },
+      "filler": {
+        "L1_background": {
+          "present": true,
+          "matched_patterns": [
+            "^Based on the (provided|given) (text|content|paper|abstract|context)"
+          ]
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      },
+      "fake_page": {
+        "L1_background": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": true,
+          "count": 13,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              2
+            ],
+            [
+              "\\(pages \\d+",
+              5
+            ],
+            [
+              "on page \\d+",
+              1
+            ],
+            [
+              "pages? \\d+[-\\u2013]\\d+",
+              5
+            ]
+          ]
+        },
+        "L2_problem": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "markdown": {
+        "L1_background": {
+          "present": true,
+          "count": 5,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              5
+            ]
+          ]
+        },
+        "L1_methods": {
+          "present": true,
+          "count": 19,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              8
+            ],
+            [
+              "^#+\\s",
+              3
+            ],
+            [
+              "^\\d+\\.\\s\\*\\*",
+              8
+            ]
+          ]
+        },
+        "L2_problem": {
+          "present": true,
+          "count": 4,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              4
+            ]
+          ]
+        },
+        "L2_scoring": {
+          "present": true,
+          "count": 20,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              10
+            ],
+            [
+              "^\\d+\\.\\s\\*\\*",
+              10
+            ]
+          ]
+        },
+        "L3_personal": {
+          "present": true,
+          "count": 6,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              3
+            ],
+            [
+              "^\\d+\\.\\s\\*\\*",
+              3
+            ]
+          ]
+        }
+      },
+      "prompt_echo": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      }
+    },
+    {
+      "paper_id": "P77",
+      "doc_id": "3a5e1b0de5a85ee3",
+      "title_extracted": "On the reproducibility of extrusion-based bioprinting: round robin study on standardization in the field",
+      "doi_extracted": "10.1088/1758-5090/acfe3b",
+      "field_completeness": {
+        "L1_background": {
+          "present": true,
+          "length": 2700,
+          "value_preview": "Certainly, here are the extracted sections from the provided research paper text..."
+        },
+        "L1_methods": {
+          "present": true,
+          "length": 2452,
+          "value_preview": "### A) Experimental Methods\n\n1. **Round Robin Workflow and Design**\n   - The rou..."
+        },
+        "L2_problem": {
+          "present": true,
+          "length": 2150,
+          "value_preview": "1) **Most Central Problem and Why It Matters:**\nThe most central problem identif..."
+        },
+        "L2_scoring": {
+          "present": true,
+          "length": 2147,
+          "value_preview": "Here's the scoring and justification for each dimension:\n\n1. **Novelty (7/10)**:..."
+        },
+        "L3_personal": {
+          "present": true,
+          "length": 1401,
+          "value_preview": "Based on the content and focus of the paper, here are the top three sections fro..."
+        }
+      },
+      "filler": {
+        "L1_background": {
+          "present": true,
+          "matched_patterns": [
+            "^Certainly[!.,]"
+          ]
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      },
+      "fake_page": {
+        "L1_background": {
+          "present": true,
+          "count": 3,
+          "matched_patterns": [
+            [
+              "pages? \\d+[-\\u2013]\\d+",
+              3
+            ]
+          ]
+        },
+        "L1_methods": {
+          "present": true,
+          "count": 12,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              2
+            ],
+            [
+              "\\(pages \\d+",
+              5
+            ],
+            [
+              "pages? \\d+[-\\u2013]\\d+",
+              5
+            ]
+          ]
+        },
+        "L2_problem": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "markdown": {
+        "L1_background": {
+          "present": true,
+          "count": 11,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              6
+            ],
+            [
+              "^#+\\s",
+              5
+            ]
+          ]
+        },
+        "L1_methods": {
+          "present": true,
+          "count": 17,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              7
+            ],
+            [
+              "^#+\\s",
+              3
+            ],
+            [
+              "^\\d+\\.\\s\\*\\*",
+              7
+            ]
+          ]
+        },
+        "L2_problem": {
+          "present": true,
+          "count": 4,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              4
+            ]
+          ]
+        },
+        "L2_scoring": {
+          "present": true,
+          "count": 20,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              10
+            ],
+            [
+              "^\\d+\\.\\s\\*\\*",
+              10
+            ]
+          ]
+        },
+        "L3_personal": {
+          "present": true,
+          "count": 6,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              3
+            ],
+            [
+              "^\\d+\\.\\s\\*\\*",
+              3
+            ]
+          ]
+        }
+      },
+      "prompt_echo": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      }
+    },
+    {
+      "paper_id": "P117",
+      "doc_id": "a6741da02cfc40ba",
+      "title_extracted": "Self-driving bioprinting laboratories",
+      "doi_extracted": "10.1088/1758-5090/ae3645",
+      "field_completeness": {
+        "L1_background": {
+          "present": true,
+          "length": 2725,
+          "value_preview": "Based on the provided text, here are the extracted sections:\n\n**Research Backgro..."
+        },
+        "L1_methods": {
+          "present": true,
+          "length": 3510,
+          "value_preview": "Based on the provided text, here are the methods organized by category:\n\n### A) ..."
+        },
+        "L2_problem": {
+          "present": true,
+          "length": 2822,
+          "value_preview": "1. **Most Central Problem and Why It Matters:**\n   The most central problem addr..."
+        },
+        "L2_scoring": {
+          "present": true,
+          "length": 2584,
+          "value_preview": "Here's the scoring for the paper \"Self-driving bioprinting laboratories\" on each..."
+        },
+        "L3_personal": {
+          "present": true,
+          "length": 264,
+          "value_preview": ", printeding bioinks (and, for.着重打印，的，着重打印\n, is着重打印,着重打印,着重打印,着重打印,着重打印,着重打印,着重打..."
+        }
+      },
+      "filler": {
+        "L1_background": {
+          "present": true,
+          "matched_patterns": [
+            "^Based on the (provided|given) (text|content|paper|abstract|context)"
+          ]
+        },
+        "L1_methods": {
+          "present": true,
+          "matched_patterns": [
+            "^Based on the (provided|given) (text|content|paper|abstract|context)"
+          ]
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      },
+      "fake_page": {
+        "L1_background": {
+          "present": true,
+          "count": 8,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              1
+            ],
+            [
+              "\\(pages \\d+",
+              3
+            ],
+            [
+              "pages? \\d+[-\\u2013]\\d+",
+              4
+            ]
+          ]
+        },
+        "L1_methods": {
+          "present": true,
+          "count": 23,
+          "matched_patterns": [
+            [
+              "\\(page \\d+",
+              9
+            ],
+            [
+              "\\(pages \\d+",
+              8
+            ],
+            [
+              "pages? \\d+[-\\u2013]\\d+",
+              6
+            ]
+          ]
+        },
+        "L2_problem": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "markdown": {
+        "L1_background": {
+          "present": true,
+          "count": 5,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              5
+            ]
+          ]
+        },
+        "L1_methods": {
+          "present": true,
+          "count": 44,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              17
+            ],
+            [
+              "^#+\\s",
+              10
+            ],
+            [
+              "^-\\s\\*\\*",
+              17
+            ]
+          ]
+        },
+        "L2_problem": {
+          "present": true,
+          "count": 12,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              8
+            ],
+            [
+              "^\\d+\\.\\s\\*\\*",
+              4
+            ]
+          ]
+        },
+        "L2_scoring": {
+          "present": true,
+          "count": 20,
+          "matched_patterns": [
+            [
+              "\\*\\*[^*]+\\*\\*",
+              10
+            ],
+            [
+              "^\\d+\\.\\s\\*\\*",
+              10
+            ]
+          ]
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "prompt_echo": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      }
+    }
+  ],
+  "summary": {
+    "n_papers": 5,
+    "title_present": 5,
+    "doi_present": 3,
+    "filler_papers": 3,
+    "fake_page_papers": 5,
+    "markdown_papers": 5,
+    "prompt_echo_papers": 2,
+    "total_fake_page_count": 149,
+    "total_markdown_count": 258,
+    "per_field_filler_rate": {
+      "L1_background": "3/5",
+      "L1_methods": "1/5",
+      "L2_problem": "0/5",
+      "L2_scoring": "0/5",
+      "L3_personal": "0/5"
+    },
+    "per_field_fake_page_rate": {
+      "L1_background": "4/5",
+      "L1_methods": "5/5",
+      "L2_problem": "2/5",
+      "L2_scoring": "2/5",
+      "L3_personal": "2/5"
+    },
+    "per_field_markdown_rate": {
+      "L1_background": "5/5",
+      "L1_methods": "5/5",
+      "L2_problem": "5/5",
+      "L2_scoring": "3/5",
+      "L3_personal": "2/5"
+    },
+    "filler_rate": "3/5",
+    "fake_page_rate": "5/5",
+    "markdown_rate": "5/5",
+    "prompt_echo_rate": "2/5"
+  }
+}
