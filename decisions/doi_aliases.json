@@ -1,8 +1,9 @@
 {
-  "_doc": "DOI alias map. Maps alias P-IDs to canonical P-ID for the same paper. Source: chapter strategy doc 2026-05-13 based on two independent audits. Until reader scripts honor this map, treat as documentation only.",
-  "version": "v1",
+  "_doc": "DOI alias map. Maps alias P-IDs to canonical P-ID for the same paper. Source: chapter strategy doc 2026-05-13 based on two independent audits, plus canonical_doi audit 2026-05-14. Until reader scripts honor this map, treat as documentation only.",
+  "version": "v2",
   "produced_at": "2026-05-13",
-  "produced_by": "audit_v1 + audit_v2 + strategy_doc",
+  "_updated_at": "2026-05-14",
+  "produced_by": "audit_v1 + audit_v2 + strategy_doc + canonical_doi_2026-05-14",
   "aliases": {
     "P5": "P90",
     "P87": "P116",
@@ -14,7 +15,9 @@
     "P38": "P14",
     "P123": "P74",
     "P4": "P26",
-    "P117": "P26"
+    "P117": "P26",
+    "P120": "P2",
+    "P91": "P64"
   },
   "canonical_notes": {
     "P90": "10.1002/adfm.202509530 — title mismatch with P5, PDF verify before locking X.3.1 / X.5 claims",
@@ -26,10 +29,21 @@
     "P98": "X.4 supporting material",
     "P14": "robotic in-situ / surface reconstruction anchor for X.5",
     "P74": "ML prediction / optimization, audit flagged for chunk cleanup",
-    "P26": "self-driving bioprinting lab anchor for X.5"
+    "P26": "self-driving bioprinting lab anchor for X.5",
+    "P2": "10.1016/j.bioactmat.2024.11.021 — surfaced by canonical_doi 2026-05-14; P120 is the same paper with wrong title extraction on one side",
+    "P64": "10.1002/advs.202412831 — surfaced by canonical_doi 2026-05-14; P91 is the same paper with wrong title extraction on one side"
   },
   "pending_verification": [
     "P5/P90: title metadata inconsistent across the two P-IDs",
     "P117: same title as P4/P26 but DOI not yet confirmed identical"
-  ]
+  ],
+  "known_doi_extraction_errors": {
+    "P71": {
+      "extracted_doi": "10.1080/17452759.2024.2400330",
+      "issue": "P71 is SLA-based bioprinting; extracted DOI actually belongs to P74/P123 extrusion paper",
+      "real_doi": null,
+      "audited_at": "2026-05-14",
+      "needs": "fix DOI extraction or re-ingest P71"
+    }
+  }
 }
