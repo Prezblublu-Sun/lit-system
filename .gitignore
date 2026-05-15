@@ -102,3 +102,9 @@ scripts/ingest.py.backup_*
 
 # Chapter master document (regenerable from section files)
 results/chapter_evidence/_chapter_master.md
+
+# Local overnight snapshots of gitignored metadata/chunks/chroma (200 MB; copyright)
+backups/
+
+# Per-batch inbox unprocessed lists (contain real PDF paths, copyright-sensitive)
+results/inbox_*_unprocessed.txt

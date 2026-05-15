@@ -171,7 +171,7 @@ def run_cleaning(docling_json_path: Path, out_dir: Path, paper_id: str):
     }
 
 
-# ============ Stage 4: SOP v2 (5 LLM calls) ============
+# ============ Stage 4: SOP v2 (6 LLM calls; v4 prompts per ADR-0014) ============
 
 # Each tuple: (sop_key, prompt_template_fn) -- prompts mirror sop_v2_direct.py
 # We keep the prompts inline here to make the pipeline self-contained.
@@ -236,18 +236,111 @@ SOP_PROMPTS = {
         + "Paper text:\n{text}\n\n"
         + "Output:"
     ),
-    "L3_personal_relevance": (
-        "Identify the top 3 sections of the review outline this paper best supports.\n\n"
+    "L3_outline_relevance": (
+        "Assess whether this paper supports any section of the provided review outline. "
+        "List up to 3 sections it genuinely supports. Do not invent matches or force "
+        "assignments when the paper is unrelated.\n\n"
         + _SOP_V3_RULES + "\n"
-        + "For each section, write a single prose paragraph (3-5 sentences) explaining: "
-        + "which section, what specific arguments the paper supports, and what evidence type "
-        + "(empirical / theoretical / review / methodology). Do not number the sections in output; "
-        + "separate them with blank lines.\n\n"
+        + "If the paper does NOT support any outline section, output exactly one line "
+        + "beginning with the prefix 'no_outline_match:', in the form:\n"
+        + "    no_outline_match: <one-sentence reason>. Closest distant analogy: <one phrase>.\n\n"
+        + "Otherwise, for each genuinely-supported section write a single prose paragraph "
+        + "(3-5 sentences) explaining: which section, what specific arguments the paper "
+        + "supports, and what evidence type (empirical / theoretical / review / methodology). "
+        + "Do not number the sections in output; separate them with blank lines.\n\n"
         + "Review outline:\n{outline}\n\n"
         + "Paper text:\n{text}\n\n"
         + "Output:"
     ),
+    "L4_domain_classification": (
+        "Classify this research paper into one of the predefined domain labels.\n\n"
+        + _SOP_V3_RULES + "\n"
+        + "Output exactly TWO lines in this format. This two-line format is the ONLY "
+        + "structured output allowed in your response; no other lists, no markdown, no "
+        + "preamble, no trailing prose.\n\n"
+        + "    primary_domain: <label>. <one-sentence justification>.\n"
+        + "    secondary_domains: <label1>, <label2>. <brief reason>.\n\n"
+        + "If the paper has no clear secondary domain, write the second line as:\n"
+        + "    secondary_domains: none.\n\n"
+        + "Valid labels (use exactly one for primary; up to two for secondary):\n"
+        + "    bioprinting, hip_implant, fea_surrogate, additive_manufacturing, "
+        + "tissue_engineering, biomechanics, machine_learning_general, other_medical, "
+        + "other_engineering, out_of_scope.\n\n"
+        + "Choose the single best primary label. Use secondary labels for clearly adjacent "
+        + "domains. Use other_medical / other_engineering for in-scope but uncategorized "
+        + "work; use out_of_scope only when the paper is unrelated to bioprinting, "
+        + "hip implants, FEA surrogate modelling, or related biomedical/engineering topics.\n\n"
+        + "Paper text:\n{text}\n\n"
+        + "Output:"
+    ),
 }
+
+
+# ============ L4 output parsing (ADR-0014) ============
+
+_VALID_DOMAIN_LABELS = {
+    "bioprinting", "hip_implant", "fea_surrogate", "additive_manufacturing",
+    "tissue_engineering", "biomechanics", "machine_learning_general",
+    "other_medical", "other_engineering", "out_of_scope",
+}
+
+
+def parse_l4_output(raw: str):
+    """Parse L4 raw output into structured dict.
+
+    Expected two-line shape:
+        primary_domain: <label>. <justification>.
+        secondary_domains: <label1>, <label2>. <reason>.   (or 'secondary_domains: none.')
+
+    Returns dict with keys: primary, primary_justification,
+    secondary (list), secondary_reason, parse_warnings (list).
+    Unknown labels are kept verbatim but flagged in parse_warnings.
+    """
+    out = {
+        "primary": None,
+        "primary_justification": None,
+        "secondary": [],
+        "secondary_reason": None,
+        "parse_warnings": [],
+    }
+    if not raw or not raw.strip():
+        out["parse_warnings"].append("empty_output")
+        return out
+    for line in raw.strip().splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        low = line.lower()
+        if low.startswith("primary_domain:"):
+            rest = line.split(":", 1)[1].strip()
+            label, _, justification = rest.partition(".")
+            label = label.strip().lower()
+            out["primary"] = label or None
+            out["primary_justification"] = justification.strip().rstrip(".") or None
+            if label and label not in _VALID_DOMAIN_LABELS:
+                out["parse_warnings"].append(f"unknown_primary_label:{label!r}")
+        elif low.startswith("secondary_domains:"):
+            rest = line.split(":", 1)[1].strip()
+            if rest.lower().lstrip().startswith("none"):
+                out["secondary"] = []
+                continue
+            labels_part, _, reason = rest.partition(".")
+            labels = [s.strip().lower() for s in labels_part.split(",") if s.strip()]
+            out["secondary"] = labels
+            out["secondary_reason"] = reason.strip().rstrip(".") or None
+            unknown = [l for l in labels if l not in _VALID_DOMAIN_LABELS]
+            if unknown:
+                out["parse_warnings"].append(f"unknown_secondary_labels:{unknown!r}")
+    if out["primary"] is None:
+        out["parse_warnings"].append("missing_primary_domain_line")
+    return out
+
+
+def derive_outline_match_status(raw: str) -> str:
+    """Per ADR-0014 step 5: 'no_match' if L3 starts with 'no_outline_match:', else 'matched'."""
+    if not raw or not raw.strip():
+        return "unknown"
+    return "no_match" if raw.lstrip().lower().startswith("no_outline_match") else "matched"
 
 
 def call_ollama(prompt: str, max_retries: int = 2):
@@ -277,7 +370,11 @@ def call_ollama(prompt: str, max_retries: int = 2):
 
 
 def run_sop_v2(pdf_text: str, outline_text: str, paper_id: str, max_chars: int = 60000):
-    """Run 5 SOP tasks. Returns dict matching sop_v2.json shape."""
+    """Run 6 SOP tasks (L1*2 + L2*2 + L3 outline_relevance + L4 domain_classification).
+
+    Function name retained per ADR-0011 versioning notes; v4 prompts now live inside.
+    L4 has no {outline} placeholder; str.format silently ignores the unused kwarg.
+    """
     paper_text = pdf_text[:max_chars]
     results = {
         "_title":      None,  # caller fills
@@ -299,6 +396,9 @@ def run_sop_v2(pdf_text: str, outline_text: str, paper_id: str, max_chars: int =
 # ============ Stage 5: metadata.json ============
 
 # Mapping mirrors build_metadata_v1.py
+# ADR-0014: L3 key renamed personal_relevance -> outline_relevance; raw output
+# still stored under the personal_relevance block + sop_l3_raw field for
+# backward-compatibility with downstream consumers that read that path.
 SOP_TO_SCHEMA = [
     ("L1_factual_background",  "factual",            "sop_l1_background_raw", None),
     ("L1_factual_methods",     "factual",            "methods_raw",           None),
@@ -306,7 +406,8 @@ SOP_TO_SCHEMA = [
         "kept under interpretive per sop_v2 naming; ADR-0003 lists under factual"),
     ("L2_interpretive_scoring","interpretive",       "scoring_10_dim_local",
         "D-grade local LLM output; pending Path C web chat review"),
-    ("L3_personal_relevance",  "personal_relevance", "sop_l3_raw",            None),
+    ("L3_outline_relevance",   "personal_relevance", "sop_l3_raw",
+        "L3 raw output; key renamed from L3_personal_relevance per ADR-0014"),
 ]
 
 
@@ -391,6 +492,57 @@ def build_metadata(paper_id, doc_id, content_hash, filename, title,
                 "note": note,
             },
         }
+
+    # ============ ADR-0014 additions ============
+    # factual.l4_raw                : raw LLM output for L4
+    # factual.domain_classification : parsed {primary, secondary, ...}
+    # interpretive.outline_match_status : derived from L3 prefix
+    l4_entry = sop_results.get("L4_domain_classification")
+    l4_raw = l4_entry["answer"] if (l4_entry and l4_entry.get("ok")) else None
+    l4_parsed = parse_l4_output(l4_raw) if l4_raw else None
+
+    md["factual"]["l4_raw"] = {
+        "value": l4_raw,
+        "_meta": {
+            "produced_by": "qwen2.5-14b-32k",
+            "prompt_version": PROMPT_VERSION,
+            "produced_at": produced_at,
+            "reviewed_by": None,
+            "reviewed_at": None,
+            "evidence": [],
+            "note": "L4 raw output; populated by ADR-0014 SOP_v4",
+            "failed": l4_entry is None or not l4_entry.get("ok"),
+            "error":  None if (l4_entry and l4_entry.get("ok")) else (
+                (l4_entry or {}).get("error", "missing")),
+        },
+    }
+    md["factual"]["domain_classification"] = {
+        "value": l4_parsed,
+        "_meta": {
+            "produced_by": "parse_l4_output",
+            "prompt_version": PROMPT_VERSION,
+            "produced_at": produced_at,
+            "reviewed_by": None,
+            "reviewed_at": None,
+            "evidence": [],
+            "note": "Parsed from L4 raw; primary + secondary labels per ADR-0014",
+        },
+    }
+
+    l3_entry = sop_results.get("L3_outline_relevance")
+    l3_raw = l3_entry["answer"] if (l3_entry and l3_entry.get("ok")) else None
+    md["interpretive"]["outline_match_status"] = {
+        "value": derive_outline_match_status(l3_raw) if l3_raw else "unknown",
+        "_meta": {
+            "produced_by": "derive_outline_match_status",
+            "prompt_version": PROMPT_VERSION,
+            "produced_at": produced_at,
+            "reviewed_by": None,
+            "reviewed_at": None,
+            "evidence": [],
+            "note": "Derived from L3 prefix: 'no_match' if L3 starts with 'no_outline_match:', else 'matched'",
+        },
+    }
     return md
 
 

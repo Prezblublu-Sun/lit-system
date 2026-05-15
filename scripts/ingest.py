@@ -144,17 +144,19 @@ def ingest_one(pdf_path: Path, paper_id: str, doc_id: str, content_hash: str,
     # Stage: SOP v2 (skippable)
     if dry_run or skip_sop:
         print(f"  [sop_v2] SKIPPED ({'dry-run' if dry_run else '--no-sop'})")
+        # Keys must match SOP_PROMPTS in pipeline.py (ADR-0014 SOP_v4: 6 tasks).
         sop_results = {
-            "L1_factual_background":   {"ok": False, "error": "skipped"},
-            "L1_factual_methods":      {"ok": False, "error": "skipped"},
-            "L2_interpretive_problem": {"ok": False, "error": "skipped"},
-            "L2_interpretive_scoring": {"ok": False, "error": "skipped"},
-            "L3_personal_relevance":   {"ok": False, "error": "skipped"},
+            "L1_factual_background":    {"ok": False, "error": "skipped"},
+            "L1_factual_methods":       {"ok": False, "error": "skipped"},
+            "L2_interpretive_problem":  {"ok": False, "error": "skipped"},
+            "L2_interpretive_scoring":  {"ok": False, "error": "skipped"},
+            "L3_outline_relevance":     {"ok": False, "error": "skipped"},
+            "L4_domain_classification": {"ok": False, "error": "skipped"},
         }
         summary["stages"]["sop_v2"] = {"skipped": True}
     else:
         pdf_text = pipeline.extract_pdf_text(pdf_path)
-        print(f"  [sop_v2] running 5 LLM tasks on {len(pdf_text):,} chars...")
+        print(f"  [sop_v2] running 6 LLM tasks on {len(pdf_text):,} chars...")
         sop_results = pipeline.run_sop_v2(pdf_text, outline_text, paper_id)
         summary["stages"]["sop_v2"] = {
             sop_key: r.get("ok", False) for sop_key, r in sop_results.items()
