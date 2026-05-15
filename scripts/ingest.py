@@ -158,8 +158,16 @@ def ingest_one(pdf_path: Path, paper_id: str, doc_id: str, content_hash: str,
         pdf_text = pipeline.extract_pdf_text(pdf_path)
         print(f"  [sop_v2] running 6 LLM tasks on {len(pdf_text):,} chars...")
         sop_results = pipeline.run_sop_v2(pdf_text, outline_text, paper_id)
+        # ADR-0017: preserve 'skipped_no_outline' as a distinct (truthy) value so
+        # the failure reporter below does not flag deliberately-skipped L3 as bad.
+        def _stage_status(r):
+            if r.get("ok"):
+                return True
+            if r.get("error") == "skipped_no_outline":
+                return "skipped_no_outline"
+            return False
         summary["stages"]["sop_v2"] = {
-            sop_key: r.get("ok", False) for sop_key, r in sop_results.items()
+            sop_key: _stage_status(r) for sop_key, r in sop_results.items()
             if isinstance(r, dict) and "ok" in r
         }
 
@@ -228,6 +236,12 @@ def main():
     ap.add_argument("--no-sop", action="store_true",
                     help="Skip SOP_v2 (5 LLM calls per paper). "
                          "Metadata will have null factual/interpretive/personal_relevance fields.")
+    ap.add_argument("--no-outline", action="store_true",
+                    help="Skip L3_outline_relevance (saves ~30s/paper). "
+                         "Use for batches unrelated to the current review outline "
+                         "(per ADR-0017). L3 entry gets a 'skipped_no_outline' "
+                         "placeholder; interpretive.outline_match_status becomes "
+                         "'skipped_no_outline'.")
     args = ap.parse_args()
 
     pdfs = [Path(p).resolve() for p in args.pdfs]
@@ -256,9 +270,16 @@ def main():
             print(f"[error] not found: {p}")
             sys.exit(1)
 
-    outline_text = OUTLINE_FILE.read_text()[:3500] if OUTLINE_FILE.exists() else ""
-    if not outline_text:
-        print("[warn] no review outline found; L3_personal_relevance will use empty outline")
+    # ADR-0017: --no-outline forces outline_text=None; run_sop_v2 then skips L3
+    # entirely and emits a 'skipped_no_outline' placeholder.
+    if args.no_outline:
+        outline_text = None
+        print("[setup] --no-outline: L3_outline_relevance will be skipped (ADR-0017)")
+    else:
+        outline_text = OUTLINE_FILE.read_text()[:3500] if OUTLINE_FILE.exists() else ""
+        if not outline_text:
+            print("[warn] no review outline file found; L3_outline_relevance will be "
+                  "skipped (ADR-0017 empty-outline branch)")
 
     doc_id_idx, doi_idx, used_nums = load_existing_index(METADATA_DIR)
     print(f"[setup] existing: {len(used_nums)} papers, used nums {sorted(used_nums)[:10]}...")

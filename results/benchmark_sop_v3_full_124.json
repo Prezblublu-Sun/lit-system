@@ -1,0 +1,706 @@
+{
+  "benchmark_version": "v1",
+  "sop_version": "v2",
+  "schema_version": "v1",
+  "ran_at": "2026-05-15T09:05:45.258585",
+  "papers": [
+    "P1",
+    "P5",
+    "P44",
+    "P77",
+    "P117"
+  ],
+  "results": [
+    {
+      "paper_id": "P1",
+      "doc_id": "5f23b7834bcd9638",
+      "title_extracted": "The Role of Artificial Intelligence in Advancing Biofabrication Technology",
+      "doi_extracted": null,
+      "field_completeness": {
+        "L1_background": {
+          "present": true,
+          "length": 1548,
+          "value_preview": "The research paper titled \"AI for Biofabrication\" explores how artificial intell..."
+        },
+        "L1_methods": {
+          "present": true,
+          "length": 1706,
+          "value_preview": "The research paper describes several methods used in AI for biofabrication:\n\nAI ..."
+        },
+        "L2_problem": {
+          "present": true,
+          "length": 2049,
+          "value_preview": "The research paper \"AI for Biofabrication\" addresses a significant challenge in ..."
+        },
+        "L2_scoring": {
+          "present": true,
+          "length": 1395,
+          "value_preview": "novelty: 6/10. Reviews existing applications of ai in biofabrication but does no..."
+        },
+        "L3_personal": {
+          "present": true,
+          "length": 1350,
+          "value_preview": "The paper best supports the following sections of the review outline:\n\nRobotic-b..."
+        }
+      },
+      "filler": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      },
+      "fake_page": {
+        "L1_background": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "markdown": {
+        "L1_background": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "prompt_echo": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      }
+    },
+    {
+      "paper_id": "P5",
+      "doc_id": "63a0f39f8e576219",
+      "title_extracted": "Challenges and Advances in 3D Bioprinting for Tissue Engineering and Regenerative Medicine",
+      "doi_extracted": "10.1002/adfm.202509530",
+      "field_completeness": {
+        "L1_background": {
+          "present": true,
+          "length": 1746,
+          "value_preview": "The research paper examines the transformative role of artificial intelligence (..."
+        },
+        "L1_methods": {
+          "present": true,
+          "length": 1043,
+          "value_preview": "In the research paper, machine learning (ML) algorithms are employed to predict ..."
+        },
+        "L2_problem": {
+          "present": true,
+          "length": 2434,
+          "value_preview": "The research paper under analysis explores the transformative role of artificial..."
+        },
+        "L2_scoring": {
+          "present": true,
+          "length": 1322,
+          "value_preview": "novelty: 6/10. Combines existing AI technologies with bioprinting but does not i..."
+        },
+        "L3_personal": {
+          "present": true,
+          "length": 1133,
+          "value_preview": "The paper supports the section on Artificial Intelligence and Robotic-Assisted A..."
+        }
+      },
+      "filler": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      },
+      "fake_page": {
+        "L1_background": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "markdown": {
+        "L1_background": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "prompt_echo": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      }
+    },
+    {
+      "paper_id": "P44",
+      "doc_id": "59efff5fa9ec3a3d",
+      "title_extracted": "Recent Computer Vision-Aided Bioprinting for Bone Research",
+      "doi_extracted": "10.1038/s41413-022-00192-2",
+      "field_completeness": {
+        "L1_background": {
+          "present": true,
+          "length": 1517,
+          "value_preview": "The research paper focuses on improving bone bioprinting accuracy and resolution..."
+        },
+        "L1_methods": {
+          "present": true,
+          "length": 1691,
+          "value_preview": "The research paper describes several methods used to improve bioprinting accurac..."
+        },
+        "L2_problem": {
+          "present": true,
+          "length": 1949,
+          "value_preview": "The research paper focuses on the application of computer vision to enhance biop..."
+        },
+        "L2_scoring": {
+          "present": true,
+          "length": 1345,
+          "value_preview": "novelty: 6/10. Combines existing technologies but does not introduce groundbreak..."
+        },
+        "L3_personal": {
+          "present": true,
+          "length": 1158,
+          "value_preview": "The paper best supports the following three sections from the review outline:\n\n[..."
+        }
+      },
+      "filler": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      },
+      "fake_page": {
+        "L1_background": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "markdown": {
+        "L1_background": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "prompt_echo": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      }
+    },
+    {
+      "paper_id": "P77",
+      "doc_id": "3a5e1b0de5a85ee3",
+      "title_extracted": "On the reproducibility of extrusion-based bioprinting: round robin study on standardization in the field",
+      "doi_extracted": "10.1088/1758-5090/acfe3b",
+      "field_completeness": {
+        "L1_background": {
+          "present": true,
+          "length": 1788,
+          "value_preview": "The research paper focuses on studying the reproducibility and standardization c..."
+        },
+        "L1_methods": {
+          "present": true,
+          "length": 1906,
+          "value_preview": "The researchers standardized the fabrication process as much as possible to stud..."
+        },
+        "L2_problem": {
+          "present": true,
+          "length": 1914,
+          "value_preview": "The research paper \"On the reproducibility of extrusion-based bioprinting: round..."
+        },
+        "L2_scoring": {
+          "present": true,
+          "length": 1332,
+          "value_preview": "novelty: 6/10. Conducts a round-robin study to assess reproducibility but does n..."
+        },
+        "L3_personal": {
+          "present": true,
+          "length": 1670,
+          "value_preview": "The paper best supports the following sections from the review outline:\n\n[2. Bio..."
+        }
+      },
+      "filler": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      },
+      "fake_page": {
+        "L1_background": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "markdown": {
+        "L1_background": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "prompt_echo": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      }
+    },
+    {
+      "paper_id": "P117",
+      "doc_id": "a6741da02cfc40ba",
+      "title_extracted": "Self-Driving Bioprinting for Transformative Tissue Engineering and Regenerative Medicine",
+      "doi_extracted": null,
+      "field_completeness": {
+        "L1_background": {
+          "present": true,
+          "length": 2117,
+          "value_preview": "The research paper titled \"Self-driving Bioprinting Laboratories\" by Suihong Liu..."
+        },
+        "L1_methods": {
+          "present": true,
+          "length": 1823,
+          "value_preview": "The research paper describes several methods used in the development of self-dri..."
+        },
+        "L2_problem": {
+          "present": true,
+          "length": 2576,
+          "value_preview": "The research paper \"Self-driving Bioprinting Laboratories\" addresses the critica..."
+        },
+        "L2_scoring": {
+          "present": true,
+          "length": 1401,
+          "value_preview": "novelty: 8/10. Proposes an innovative integration of existing technologies but d..."
+        },
+        "L3_personal": {
+          "present": true,
+          "length": 1821,
+          "value_preview": "The paper best supports the following sections from the review outline:\n\nRobotic..."
+        }
+      },
+      "filler": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      },
+      "fake_page": {
+        "L1_background": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "markdown": {
+        "L1_background": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "count": 0,
+          "matched_patterns": []
+        }
+      },
+      "prompt_echo": {
+        "L1_background": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L1_methods": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_problem": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L2_scoring": {
+          "present": false,
+          "matched_patterns": []
+        },
+        "L3_personal": {
+          "present": false,
+          "matched_patterns": []
+        }
+      }
+    }
+  ],
+  "summary": {
+    "n_papers": 5,
+    "title_present": 5,
+    "doi_present": 3,
+    "filler_papers": 0,
+    "fake_page_papers": 0,
+    "markdown_papers": 0,
+    "prompt_echo_papers": 0,
+    "total_fake_page_count": 0,
+    "total_markdown_count": 0,
+    "per_field_filler_rate": {
+      "L1_background": "0/5",
+      "L1_methods": "0/5",
+      "L2_problem": "0/5",
+      "L2_scoring": "0/5",
+      "L3_personal": "0/5"
+    },
+    "per_field_fake_page_rate": {
+      "L1_background": "0/5",
+      "L1_methods": "0/5",
+      "L2_problem": "0/5",
+      "L2_scoring": "0/5",
+      "L3_personal": "0/5"
+    },
+    "per_field_markdown_rate": {
+      "L1_background": "0/5",
+      "L1_methods": "0/5",
+      "L2_problem": "0/5",
+      "L2_scoring": "0/5",
+      "L3_personal": "0/5"
+    },
+    "filler_rate": "0/5",
+    "fake_page_rate": "0/5",
+    "markdown_rate": "0/5",
+    "prompt_echo_rate": "0/5"
+  }
+}

@@ -336,8 +336,28 @@ def parse_l4_output(raw: str):
     return out
 
 
-def derive_outline_match_status(raw: str) -> str:
-    """Per ADR-0014 step 5: 'no_match' if L3 starts with 'no_outline_match:', else 'matched'."""
+def derive_outline_match_status(l3_entry) -> str:
+    """Derive outline_match_status from a sop_results['L3_outline_relevance'] entry.
+
+    Returns one of:
+        'skipped_no_outline' — L3 entry is None or was deliberately skipped
+                               (ADR-0017: --no-outline / empty outline file).
+        'unknown'            — L3 ran but produced empty/missing answer
+                               (or was skipped for a different reason, e.g. --no-sop).
+        'no_match'           — L3 answer starts with 'no_outline_match:' (ADR-0014).
+        'matched'            — L3 answer is substantive prose listing supported sections.
+
+    Accepts either the full L3 entry dict (preferred) or its raw answer string,
+    for backward compatibility with callers that pre-extracted the answer.
+    """
+    if l3_entry is None:
+        return "skipped_no_outline"
+    if isinstance(l3_entry, dict):
+        if l3_entry.get("error") == "skipped_no_outline":
+            return "skipped_no_outline"
+        raw = l3_entry.get("answer") if l3_entry.get("ok") else None
+    else:
+        raw = l3_entry
     if not raw or not raw.strip():
         return "unknown"
     return "no_match" if raw.lstrip().lower().startswith("no_outline_match") else "matched"
@@ -374,15 +394,25 @@ def run_sop_v2(pdf_text: str, outline_text: str, paper_id: str, max_chars: int =
 
     Function name retained per ADR-0011 versioning notes; v4 prompts now live inside.
     L4 has no {outline} placeholder; str.format silently ignores the unused kwarg.
+
+    ADR-0017: when outline_text is None or empty/whitespace, L3_outline_relevance
+    is skipped entirely (saves ~30s GPU/paper and avoids forced no_match output
+    against a missing outline). Skipped L3 returns a placeholder entry so
+    downstream code that checks for key presence keeps working.
     """
     paper_text = pdf_text[:max_chars]
+    skip_l3 = outline_text is None or not str(outline_text).strip()
     results = {
         "_title":      None,  # caller fills
         "_filename":   None,  # caller fills
         "_pdf_chars":  len(pdf_text),
     }
     for sop_key, template in SOP_PROMPTS.items():
-        prompt = template.format(text=paper_text, outline=outline_text)
+        if sop_key == "L3_outline_relevance" and skip_l3:
+            print(f"  [{paper_id}] {sop_key} SKIPPED (no outline) [ADR-0017]")
+            results[sop_key] = {"ok": False, "error": "skipped_no_outline"}
+            continue
+        prompt = template.format(text=paper_text, outline=outline_text or "")
         print(f"  [{paper_id}] {sop_key} ...")
         out = call_ollama(prompt)
         results[sop_key] = out
@@ -530,9 +560,8 @@ def build_metadata(paper_id, doc_id, content_hash, filename, title,
     }
 
     l3_entry = sop_results.get("L3_outline_relevance")
-    l3_raw = l3_entry["answer"] if (l3_entry and l3_entry.get("ok")) else None
     md["interpretive"]["outline_match_status"] = {
-        "value": derive_outline_match_status(l3_raw) if l3_raw else "unknown",
+        "value": derive_outline_match_status(l3_entry),
         "_meta": {
             "produced_by": "derive_outline_match_status",
             "prompt_version": PROMPT_VERSION,
@@ -540,7 +569,7 @@ def build_metadata(paper_id, doc_id, content_hash, filename, title,
             "reviewed_by": None,
             "reviewed_at": None,
             "evidence": [],
-            "note": "Derived from L3 prefix: 'no_match' if L3 starts with 'no_outline_match:', else 'matched'",
+            "note": "Derived from L3 entry: 'skipped_no_outline' if L3 was skipped (ADR-0017), 'no_match' if L3 starts with 'no_outline_match:', 'matched' if substantive, 'unknown' otherwise",
         },
     }
     return md

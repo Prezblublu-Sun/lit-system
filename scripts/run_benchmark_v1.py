@@ -157,9 +157,28 @@ def check_l4_cleanliness(raw: str) -> dict:
 
 
 def check_field_completeness(metadata: dict) -> dict:
-    """Verify all 5 SOP fields are present and non-empty."""
+    """Verify all 5 SOP fields are present and non-empty.
+
+    ADR-0017: L3 may be deliberately skipped (no outline provided). Detect via
+    interpretive.outline_match_status == 'skipped_no_outline' and report L3 as
+    a clean skipped state rather than as a missing/failed field.
+    """
+    l3_skipped = False
+    try:
+        if metadata["interpretive"]["outline_match_status"]["value"] == "skipped_no_outline":
+            l3_skipped = True
+    except (KeyError, TypeError):
+        pass
+
     status = {}
     for label, (block, key) in SOP_FIELDS.items():
+        if label == "L3_outline" and l3_skipped:
+            status[label] = {
+                "present": False,
+                "length": 0,
+                "skipped_no_outline": True,
+            }
+            continue
         try:
             val = metadata[block][key]["value"]
             status[label] = {
@@ -362,6 +381,11 @@ def main():
         for label in SOP_FIELDS:
             comp = r["field_completeness"].get(label, {})
             length = comp.get("length", 0)
+
+            # ADR-0017: L3 skipped (no outline) is a clean state, not a failure.
+            if comp.get("skipped_no_outline"):
+                print(f"    {label:18s} [{length:5d} chars]  SKIPPED (no outline, ADR-0017)")
+                continue
 
             problems = []
             if r["filler"].get(label, {}).get("present"):
